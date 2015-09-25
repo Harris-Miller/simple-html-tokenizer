@@ -8,6 +8,12 @@ QUnit.test("Simple content", function(assert) {
   ]);
 });
 
+QUnit.test("Content containing '{'", function(assert) {
+  var tokens = HTML5Tokenizer.tokenize("curly { brace");
+  assert.deepEqual(tokens, [
+    chars("curly { brace")]);
+});
+
 QUnit.test("A simple tag", function(assert) {
   var tokens = HTML5Tokenizer.tokenize("<div>");
   assert.deepEqual(tokens, [
@@ -259,6 +265,13 @@ QUnit.test("tokens: comment start-tag Chars end-tag", function(assert) {
   ]);
 });
 
+QUnit.test("A simple expression", function(assert) {
+  var tokens = HTML5Tokenizer.tokenize("{{exp}}");
+  assert.deepEqual(tokens, [
+    expTag('exp')
+  ]);
+})
+
 function chars(s) {
   return {
     type: "Chars",
@@ -304,3 +317,10 @@ function locInfo(token, startLine, startColumn, endLine, endColumn) {
   return token;
 }
 
+function expTag(expName, attributes) {
+  return {
+    type: "Expression",
+    expName: expName,
+    attributes: []
+  }
+}

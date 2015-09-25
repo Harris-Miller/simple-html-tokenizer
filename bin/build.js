@@ -9,7 +9,7 @@ rollup.rollup({
   entry: entry
 }).then(function (bundle) {
   return bundle.write({
-    sourceMap: true,
+    // sourceMap: true,
     dest: dest,
     format: 'umd',
     moduleName: 'HTML5Tokenizer'

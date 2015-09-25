@@ -1,0 +1,77 @@
+
+- tagOpen
+|
+|     - beforeAttributeName
+|     |
+|     |     - beforeAttributeValue
+|     |     |
+|     |     |                - afterAttributeValueQuoted
+|     |     |                |
+|     |     |                |          - selfClosingStartTag
+|     |     |                |          |
+|     |     |                |          |
+<input class="myclass another" readonly />
+ |     |     |                 |         |
+ |     |     |                 |         - beforeData
+ |     |     |                 |
+ |     |     |                 - attributeValueUnquoted
+ |     |     |
+ |     |     - attributeValueDoubleQuoted / attributeValueSingleQuoted
+ |     |
+ |     - beginAttribute
+ |
+ - tagName
+
+
+
+- data
+|
+|                                      - tagOpen
+|                                      |
+|                                      | - tagName
+|                                      | |
+some text <div id="container">Some text</div>
+          |                             |   |
+          |                             |   - beforeData
+          |                             |
+          |                             - endTagOpen
+          |
+          |
+          - tagOpen
+
+
+
+- data
+|
+|         =- expOpen
+|         |
+|         |          - beforeExpAttrName
+|         |          |
+|         |          |     - beforeExpAttr
+|         |          |     |
+|         |          |     |    - beforeExpAttrValue
+|         |          |     |    |
+|         |          |     |    |         - beforeExpAttrName
+|         |          |     |    |         |
+|         |          |     |    |         |               - expAttrNameQuoted
+|         |          |     |    |         |               |
+|         |          |     |    |         |               |        - possibleExpressionEnd
+|         |          |     |    |         |               |        |
+|         |          |     |    |         |               |        |
+test for {{handlebars value hash="literal" other=variable "literal"}} and more!
+         | |          |     |    |               |                | |
+         | |          |     |    |               |                | - beforeData
+         | |          |     |    |               |                |
+         | |          |     |    |               |                - afterExpAttrNameQuoted
+         | |          |     |    |               |
+         | |          |     |    |               - expAttrValueUnquoted
+         | |          |     |    |
+         | |          |     |    - expAttrValueDoubleQuoted / expAttrValueSingleQuoted
+         | |          |     |
+         | |          |     - expAexpAttrNametr
+         | |          |
+         | |          - expAttrName
+         | |
+         | - expName
+         |
+         - possibleExpOpen

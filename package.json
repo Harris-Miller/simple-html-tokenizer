@@ -14,7 +14,7 @@
   "main": "dist/simple-html-tokenizer.js",
   "jsnext:main": "lib/simple-html-tokenizer.js",
   "scripts": {
-    "build": "bin/build.js",
+    "build": "node ./bin/build.js",
     "prepublish": "npm run build",
     "test": "testem ci",
     "lint": "jshint bin lib test"
