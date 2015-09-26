@@ -268,9 +268,31 @@ QUnit.test("tokens: comment start-tag Chars end-tag", function(assert) {
 QUnit.test("A simple expression", function(assert) {
   var tokens = HTML5Tokenizer.tokenize("{{exp}}");
   assert.deepEqual(tokens, [
-    expTag('exp')
+    exp('exp')
   ]);
-})
+});
+
+QUnit.test("Expression with reference attr", function(assert) {
+  var tokens = HTML5Tokenizer.tokenize("{{exp reference}}");
+  assert.deepEqual(tokens, [
+    exp('exp', ['reference', null, false, null])
+  ]);
+});
+
+QUnit.test("Expression with literal attr", function(assert) {
+  var tokens = HTML5Tokenizer.tokenize('{{exp "literal"}}');
+  assert.deepEqual(tokens, [
+    exp('exp', ['literal', null, true, null])
+  ]);
+});
+
+// QUnit.test("Expression with reference set to reference", function(assert) {
+
+// });
+
+// QUnit.test("Expression with reference set to literal", function(assert) {
+
+// });
 
 function chars(s) {
   return {
@@ -317,7 +339,7 @@ function locInfo(token, startLine, startColumn, endLine, endColumn) {
   return token;
 }
 
-function expTag(expName, attributes) {
+function exp(expName, attributes) {
   return {
     type: "Expression",
     expName: expName,
