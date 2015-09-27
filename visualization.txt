@@ -75,3 +75,27 @@ test for {{handlebars value hash="literal" other=variable "literal"}} and more!
          | - expName
          |
          - possibleExpOpen
+
+
+- tagOpen
+|
+|     - beforeAttributeName
+|     |
+|     |     - beforeAttributeValue
+|     |     |
+|     |     | - attributeValue
+|     |     | |
+|     |     | |
+|     |     | |
+<input class="className {{propName}}" value={{propName}}>
+ |     |     |
+ |     |     |
+ |     |     |
+ |     |     |
+ |     |     - attributeValueDoubleQuoted / attributeValueSingleQuoted
+ |     |
+ |     - beginAttribute
+ |
+ - tagName
+
+
