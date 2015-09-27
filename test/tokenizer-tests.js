@@ -321,6 +321,25 @@ QUnit.test("tokens: expression", function(assert) {
   ]);
 });
 
+QUnit.test("tokens: char exp char", function(assert) {
+  var tokens = HTML5Tokenizer.tokenize("text{{exp attr=value}}text", { loc: true });
+  assert.deepEqual(tokens, [
+    locInfo(chars("text"), 1, 0, 1, 4),
+    locInfo(startExp("exp", ['attr', 'value', false, false]), 1, 4, 1, 22),
+    locInfo(chars("text"), 1, 22, 1, 26)
+  ]);
+});
+
+QUnit.test("tokens: startTag exp endTag", function(assert) {
+  var tokens = HTML5Tokenizer.tokenize("<div>{{exp}}</div>", { loc: true });
+
+  assert.deepEqual(tokens, [
+    locInfo(startTag('div'), 1, 0, 1, 5),
+    locInfo(startExp('exp'), 1, 5, 1, 12),
+    locInfo(endTag('div'), 1, 12, 1, 18)
+  ]);
+});
+
 function chars(s) {
   return {
     type: "Chars",
