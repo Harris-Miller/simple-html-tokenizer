@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>simple-html-tokenizer Demo</title>
+  <link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.css">
+
+  <style>
+
+    textarea {
+      width: 100%;
+      height: 400px;
+    }
+
+  </style>
+</head>
+<body>
+
+  <main class="container">
+    <div class="row">
+      <h1>simple-html-tokenizer demo</h1>
+
+      <div class="col-md-6">
+        <h3>html</h3>
+        <textarea name="html" id="html" placeholder="Enter HTML here"></textarea>
+        <br>
+        <button id="build" class="btn primary">Tokenize!</button>
+        <button id="build-loc" class="btn">With Loc Info</button>
+      </div>
+
+      <div class="col-md-6">
+        <h3>tokenized</h3>
+        <pre><code id="output"></code></pre>
+      </div>
+    </div>
+  </main>
+  
+  <script src="../bower_components/jquery/dist/jquery.js"></script>
+  <script src="../bower_components/bootstrap/dist/js/bootstrap.js"></script>
+  <script src="../dist/simple-html-tokenizer.js"></script>
+
+  <script>
+    var $build = $('#build');
+    var $withLoc = $('#build-loc');
+    var $html = $('#html');
+    var $output = $('#output');
+
+    function build(withLoc) {
+      var html = $html.val();
+
+      var tokenized = HTML5Tokenizer.tokenize(html, { loc : withLoc });
+
+      var asString = JSON.stringify(tokenized, null, 2);
+      $output.text(asString);
+    }
+
+    $build.on('click', function() {
+      build(false);
+    });
+
+    $withLoc.on('click', function() {
+      build(true);
+    });
+  </script>
+</body>
+</html>

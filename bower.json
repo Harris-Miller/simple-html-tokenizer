@@ -1,0 +1,30 @@
+{
+  "name": "simple-html-tokenizer",
+  "version": "0.2.0",
+  "homepage": "https://github.com/Harris-Miller/simple-html-tokenizer",
+  "authors": [
+    "Harris Miller <harrismiller08@gmail.com>"
+  ],
+  "description": "Simple HTML Tokenizer is a lightweight JavaScript library that can be used to tokenize the kind of HTML normally found in templates.",
+  "main": "dist/simple-html-tokenizer.js",
+  "moduleType": [
+    "amd",
+    "globals",
+    "node"
+  ],
+  "keywords": [
+    "html",
+    "tokenizer"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "devDependencies": {
+    "bootstrap": "~3.3.5"
+  }
+}

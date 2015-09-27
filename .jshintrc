@@ -1,24 +1,31 @@
 {
-  "predef": {
-    "document": true,
-    "QUnit": true,
-    "test": true,
-    "expect": true,
-    "equal": true,
-    "deepEqual": true,
-    "ok": true
-  },
-  "camelcase": true,
+  "predef": [
+    "document",
+    "window"
+  ],
+  "browser": true,
+  "boss": true,
   "curly": true,
+  "debug": false,
+  "devel": true,
   "eqeqeq": true,
-  "eqnull": true,
-  "freeze": true,
-  "immed": true,
-  "indent": 2,
-  "latedef": "nofunc",
+  "evil": true,
+  "forin": false,
+  "immed": false,
+  "laxbreak": false,
   "newcap": true,
   "noarg": true,
+  "noempty": false,
+  "nonew": false,
+  "nomen": false,
+  "onevar": false,
+  "plusplus": false,
+  "regexp": false,
   "undef": true,
-  "unused": true,
-  "esnext": true
+  "sub": true,
+  "strict": false,
+  "white": false,
+  "eqnull": true,
+  "esnext": true,
+  "unused": "var"
 }

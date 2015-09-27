@@ -268,31 +268,58 @@ QUnit.test("tokens: comment start-tag Chars end-tag", function(assert) {
 QUnit.test("A simple expression", function(assert) {
   var tokens = HTML5Tokenizer.tokenize("{{exp}}");
   assert.deepEqual(tokens, [
-    exp('exp')
+    startExp('exp')
   ]);
 });
 
 QUnit.test("Expression with reference attr", function(assert) {
   var tokens = HTML5Tokenizer.tokenize("{{exp reference}}");
   assert.deepEqual(tokens, [
-    exp('exp', ['reference', null, false, null])
+    startExp('exp', ['reference', "", false, null])
   ]);
 });
 
-QUnit.test("Expression with literal attr", function(assert) {
-  var tokens = HTML5Tokenizer.tokenize('{{exp "literal"}}');
+QUnit.test("Expression with double quote literal attr", function(assert) {
+  var tokens = HTML5Tokenizer.tokenize('{{exp "attr"}}');
   assert.deepEqual(tokens, [
-    exp('exp', ['literal', null, true, null])
+    startExp('exp', ['attr', "", true, null])
   ]);
 });
 
-// QUnit.test("Expression with reference set to reference", function(assert) {
+QUnit.test("Expression with single quote literal attr", function(assert) {
+  var tokens = HTML5Tokenizer.tokenize("{{exp 'attr'}}");
+  assert.deepEqual(tokens, [
+    startExp('exp', ['attr', "", true, null])
+  ]);
+});
 
-// });
+QUnit.test("Expression with attr set to reference", function(assert) {
+  var tokens = HTML5Tokenizer.tokenize('{{exp attr=value}}');
+  assert.deepEqual(tokens, [
+    startExp('exp', ['attr', 'value', false, false])
+  ]);
+});
 
-// QUnit.test("Expression with reference set to literal", function(assert) {
+QUnit.test("Expression with reference set to single double literal", function(assert) {
+  var tokens = HTML5Tokenizer.tokenize('{{exp attr="value"}}');
+  assert.deepEqual(tokens, [
+    startExp('exp', ['attr', 'value', false, true])
+  ]);
+});
 
-// });
+QUnit.test("Expression with reference set to single single literal", function(assert) {
+  var tokens = HTML5Tokenizer.tokenize("{{exp attr='value'}}");
+  assert.deepEqual(tokens, [
+    startExp('exp', ['attr', 'value', false, true])
+  ]);
+});
+
+QUnit.test("tokens: expression", function(assert) {
+  var tokens = HTML5Tokenizer.tokenize("{{exp attr=value}}", { loc: true });
+  assert.deepEqual(tokens, [
+    locInfo(startExp("exp", ['attr', 'value', false, false]), 1, 0, 1, 18)
+  ]);
+});
 
 function chars(s) {
   return {
@@ -339,10 +366,22 @@ function locInfo(token, startLine, startColumn, endLine, endColumn) {
   return token;
 }
 
-function exp(expName, attributes) {
-  return {
-    type: "Expression",
+function startExp(expName, attributes, isBlock) {
+  var rtn = {
+    type: "StartExp",
     expName: expName,
-    attributes: []
-  }
+    attributes: [],
+    block: isBlock || false
+  };
+
+  attributes && rtn.attributes.push(attributes);
+
+  return rtn;
+}
+
+function endExp(expName) {
+  return {
+    type: "EndExp",
+    expName: expName
+  };
 }
